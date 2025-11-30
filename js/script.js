@@ -1,10 +1,15 @@
-console.log('hello js')
+const modal = document.getElementById('call-modal');
+const modalTitle = document.getElementById('modal-title');
+const modalMsg = document.getElementById('modal-msg');
+const closeModal = document.getElementById('close-modal');
 
 
-// document.getElementById('btn-call').addEventListener("click", function(){
-//     alert('call kore daw')
-// })
+let pendingName = "";
+let pendingNumber ="";
 
+
+
+// heart icon
 const hearts = document.querySelectorAll('.heart-btn');
 const count = document.getElementById('heart-count')
 
@@ -29,18 +34,55 @@ const historyList = document.getElementById('history-list')
 callButtons.forEach(button => {
     button.addEventListener('click', function () {
 
-        const serviceName = this.getAttribute("data-name");
-        const serviceNumber = this.getAttribute("data-number")
+        const title = this.getAttribute("data-title");
+        const name = this.getAttribute("data-name");
+        const number = this.getAttribute('data-number')
 
     if (coins < 20) {
-        alert("You have less than  20 coins. You can not make a call");
-        return;
+       modalTitle.textContent = "Not Enough Coins"
+       modalMsg.textContent = "You need minimum 20 coins to make a call."
+       modal.classList.remove("hidden");
+       return;
+        
     }
+    // temp
+    pendingName = name;
+    pendingNumber = number;
 
-    alert('calling ${serviceName} at ${serviceNumber}');
+    // open model
+     modalTitle.textContent = title;
+    modalMsg.textContent = `Calling ${name} at ${number}`;
+        modal.classList.remove("hidden");
+    
+       
+    });
+});
+
+// close modal
+closeModal.addEventListener("click", () => {
+    if (pendingName !== "" && pendingNumber !== "") {
+        // coin
 
     coins -= 20;
     updateCoin();
 
-    })
+    // history
+    const li = document.createElement("li");
+    li.className = "p-2 bg-gray-100 rounded";
+    li.textContent = `${pendingName} - ${pendingNumber}`;
+    historyList.appendChild(li);
+
+    pendingName = "";
+    pendingNumber ="";
+
+    }
+    modal.classList.add("hidden");
 })
+
+ 
+
+// clear history
+
+document.getElementById('clear-history').addEventListener('click', () => {
+    historyList.innerHTML = "";
+});

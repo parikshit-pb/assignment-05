@@ -68,7 +68,9 @@
                     <div class="justify-between flex mt-4">
 
                         <button onclick="alert('copy koro')" class="btn btn-xs text-gray-500 border-1 border-gray-300 py-4 px-12 rounded-md"><span><i class="fa-solid fa-copy"></i></span>Copy</button>
-                        <button id="btn-call" class="btn btn-xs call-btn bg-green-500 text-white px-12 py-4 rounded-md "><span><i class="fa-solid fa-phone"></i></span>Call</button>
+                        <button id="btn-call" class="btn btn-xs call-btn bg-green-500 text-white px-12 py-4 rounded-md " 
+                        data-title="National Emergency Number"
+                        data-name="National Emergency" data-number="999"><span><i class="fa-solid fa-phone"></i></span>Call</button>
                     </div>
         </div>
             <div class="cart  bg-white shadow-xl p-5 rounded-md"> 
@@ -220,13 +222,23 @@
             <div class="flex justify-between p-4 items-center">
                 <div class="flex gap-2"><span><i class="fa-solid fa-clock-rotate-left"></i></span>
                 <h1 class="font-bold"> Call History</h1></div>
-               <button class="btn bg-green-500 rounded-3xl text-white">Clear</button>
+               <button id="clear-history" class="btn bg-green-500 rounded-3xl text-white ">Clear</button>
                
             </div>
             <ul id="history-list" class="p-4 space-y-2">
                 
             </ul>
         </aside>
+
+        <div id="call-modal" class="fixed inset-0 hidden  justify-center items-center z-50">
+            <div class="bg-white p-6 rounded-lg w-80 shadow-lg gap-4">
+                <h2 id="modal-title" class="text-xs font-bold md-2"></h2>
+                <p id="modal-msg" class="md-4 text-sm pt-2"></p>
+                <div class="pt-3 flex justify-end">
+                    <button id="close-modal" class="bg-green-600 text-white px-4 justify-end flex rounded">ok</button>
+                </div>
+            </div>
+        </div>
     </section>
         </section>
     </main>
