@@ -27,9 +27,11 @@ hearts.forEach(heart => {
 });
 // copy btn
 copyButtons.forEach(button => {
-    button.addEventListener("click", () => {
-        const number = button.getAttribute("data-number");
-        const title = button.getAttribute("data-title");
+    button.addEventListener("click", (e) => {
+        const btn = e.target.closest(".copy-btn");
+
+        const number = btn.dataset.number || "";
+        const title = btn.dataset.title || "";
 
         navigator.clipboard.writeText(number).then(() => {
             alert(`Copy Done- ${title} (${number})`);
